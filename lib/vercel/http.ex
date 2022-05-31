@@ -11,6 +11,16 @@ defmodule Vercel.Http do
     end
   end
 
+  def request(:delete, url, params) do
+    case delete(url, [Authorization: "Bearer " <> access_token()], params: params) do
+      {:ok, %HTTPoison.Response{body: body}} ->
+        body
+
+      {:error, error} ->
+        raise "Vercel.HttpClient error: #{error}"
+    end
+  end
+
   def request(:post, url, body_params, query_params) do
     case post(
            url,
