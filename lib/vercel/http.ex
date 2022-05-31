@@ -26,7 +26,7 @@ defmodule Vercel.Http do
     end
   end
 
-  defp access_token, do: Application.fetch_env!(:vercel, :access_token)
+  defp access_token, do: Vercel.get_env(:access_token)
 
   def process_request_url(url) do
     "https://api.vercel.com/" <> url
@@ -49,23 +49,23 @@ defmodule Vercel.Http do
   @doc """
   Convert map string keys to :atom keys
   """
-  def atomize_keys(nil), do: nil
+  defp atomize_keys(nil), do: nil
 
-  def atomize_keys(%{__struct__: _} = struct) do
+  defp atomize_keys(%{__struct__: _} = struct) do
     struct
   end
 
-  def atomize_keys(%{} = map) do
+  defp atomize_keys(%{} = map) do
     map
     |> Enum.map(fn {k, v} -> {to_atom(k), atomize_keys(v)} end)
     |> Enum.into(%{})
   end
 
-  def atomize_keys([head | rest]) do
+  defp atomize_keys([head | rest]) do
     [atomize_keys(head) | atomize_keys(rest)]
   end
 
-  def atomize_keys(not_a_map), do: not_a_map
+  defp atomize_keys(not_a_map), do: not_a_map
 
   defp to_atom(str) when is_bitstring(str), do: String.to_atom(str)
   defp to_atom(str) when is_atom(str), do: str
