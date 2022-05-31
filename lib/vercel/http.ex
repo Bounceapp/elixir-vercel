@@ -2,7 +2,11 @@ defmodule Vercel.Http do
   use HTTPoison.Base
 
   def request(:get, url, params) do
-    case get(url, [Authorization: "Bearer " <> access_token()], params: params) do
+    case get(url, [Authorization: "Bearer " <> access_token()],
+           params: params,
+           timeout: 15_000,
+           recv_timeout: 15_000
+         ) do
       {:ok, %HTTPoison.Response{body: body}} ->
         body
 
@@ -12,7 +16,11 @@ defmodule Vercel.Http do
   end
 
   def request(:delete, url, params) do
-    case delete(url, [Authorization: "Bearer " <> access_token()], params: params) do
+    case delete(url, [Authorization: "Bearer " <> access_token()],
+           params: params,
+           timeout: 15_000,
+           recv_timeout: 15_000
+         ) do
       {:ok, %HTTPoison.Response{body: body}} ->
         body
 
@@ -26,7 +34,9 @@ defmodule Vercel.Http do
            url,
            Poison.encode!(body_params),
            [Authorization: "Bearer " <> access_token(), "Content-Type": "application/json"],
-           params: query_params
+           params: query_params,
+           timeout: 15_000,
+           recv_timeout: 15_000
          ) do
       {:ok, %HTTPoison.Response{body: body}} ->
         body
