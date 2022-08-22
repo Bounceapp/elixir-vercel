@@ -4,7 +4,7 @@ defmodule Vercel.MixProject do
   def project do
     [
       app: :vercel,
-      version: "0.1.4",
+      version: "0.1.5",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       description: "An elixir wrapper for Vercel's API",

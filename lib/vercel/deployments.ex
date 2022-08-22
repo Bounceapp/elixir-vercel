@@ -10,6 +10,7 @@ defmodule Vercel.Deployments do
   @spec create(params, opts) :: {:ok, map()} | {:error, any()}
         when params: %{
                :name => String.t(),
+               :target => String.t(),
                optional(:gitSource) => %{
                  :org => String.t(),
                  :repo => String.t(),

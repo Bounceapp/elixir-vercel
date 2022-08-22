@@ -9,7 +9,7 @@ This package can be installed by adding `vercel` to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:vercel, "~> 0.1.4"}
+    {:vercel, "~> 0.1.5"}
   ]
 end
 ```
