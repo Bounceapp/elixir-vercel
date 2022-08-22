@@ -10,7 +10,8 @@ defmodule Vercel.Dns do
         when params: %{
                :type => String.t(),
                :name => String.t(),
-               :value => String.t()
+               :value => String.t(),
+               :priority => number()
              },
              opts: %{
                optional(:teamId) => String.t()
