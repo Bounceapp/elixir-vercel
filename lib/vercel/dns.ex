@@ -11,7 +11,7 @@ defmodule Vercel.Dns do
                :type => String.t(),
                :name => String.t(),
                :value => String.t(),
-               :mxPriority => number()
+               optional(:mxPriority) => number()
              },
              opts: %{
                optional(:teamId) => String.t()
