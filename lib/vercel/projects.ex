@@ -26,6 +26,20 @@ defmodule Vercel.Projects do
   end
 
   @doc """
+  Get information about a domain that has been assigned to a project.
+
+  https://vercel.com/docs/rest-api#endpoints/projects/get-a-project-domain
+  """
+  @spec get_domain(project :: String.t(), domain :: String.t(), opts) ::
+          {:ok, map()} | {:error, any()}
+        when opts: %{
+               optional(:teamId) => String.t()
+             }
+  def get_domain(project, domain, opts \\ %{}) do
+    request(:get, "v9/" <> @endpoint <> "/" <> project <> "/domains/" <> domain, opts)
+  end
+
+  @doc """
   Attempts to verify a project domain with verified = false by checking the correctness of the project domain's verification challenge.
 
   https://vercel.com/docs/rest-api#endpoints/projects/verify-project-domain
